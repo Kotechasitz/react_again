@@ -1,7 +1,10 @@
 import Axios from 'axios';
-import { useState  } from 'react'
+import { useState, useEffect  } from 'react'
+import BoostrapTable from 'react-bootstrap-table-next';
+import paginationFactory from "react-bootstrap-table2-paginator";
+import * as ReactBootStrap from "react-bootstrap";
 
-function App() {
+const App = () => {
 
   const [employeeList, setEmployeeList] = useState([
     {
@@ -10,7 +13,77 @@ function App() {
       country: "test",
       position: "tester",
       wage: 100,
-    }
+    },
+    {
+      name: "eiei",
+      age: 9,
+      country: "test",
+      position: "tester",
+      wage: 100,
+    },
+    {
+      name: "eiei",
+      age: 8,
+      country: "test",
+      position: "tester",
+      wage: 100,
+    },
+    {
+      name: "eiei",
+      age: 7,
+      country: "test",
+      position: "tester",
+      wage: 100,
+    },
+    {
+      name: "eiei",
+      age: 6,
+      country: "test",
+      position: "tester",
+      wage: 100,
+    },
+    {
+      name: "eiei",
+      age: 5,
+      country: "test",
+      position: "tester",
+      wage: 100,
+    },
+    {
+      name: "eiei",
+      age: 4,
+      country: "test",
+      position: "tester",
+      wage: 100,
+    },
+    {
+      name: "eiei",
+      age: 3,
+      country: "test",
+      position: "tester",
+      wage: 100,
+    },
+    {
+      name: "eiei",
+      age: 2,
+      country: "test",
+      position: "tester",
+      wage: 100,
+    },
+    {
+      name: "eiei",
+      age: 1,
+      country: "test",
+      position: "tester",
+      wage: 100,
+    },
+    {
+      name: "eiei",
+      age: 0,
+      country: "test",
+      position: "tester",
+      wage: 100,
+    },
   ]);
   const [name, setName] = useState("");
   const [age, setAge] = useState(0);
@@ -19,14 +92,23 @@ function App() {
   const [wage, setWage] = useState(0);
   const [newWage, setNewWage] = useState(0);
 
-  const getEmployees = ()=>{
-    Axios.get('http://localhost:3001/employee').then((res)=>{
+  const column = [
+    { dataField: "name", text:"Name",sort:true },
+    { dataField: "age", text:"Age",sort:true },
+    { dataField: "country", text:"Country",sort:true },
+    { dataField: "position", text:"Position",sort:true },
+    { dataField: "wage", text:"Wage",sort:true },
+    { dataField: "option", text:"Option"}
+  ];
+
+  const getEmployees = async () =>{
+    await Axios.get('http://localhost:3001/employee').then((res)=>{
       setEmployeeList(res.data)
     });
   }
 
-  const addEmployee = () => {
-    Axios.post('http://localhost:3001/create', {
+  const addEmployee = async () => {
+    await Axios.post('http://localhost:3001/create', {
       name: name,
       age: age,
       country: country,
@@ -46,9 +128,9 @@ function App() {
     });
   }
 
-  const updateWage = (id) => {
-    Axios.put("http://localhost:3001/update", { wage: newWage, id: id }).then(
-      (response) => {
+  const updateWage = async (id) => {
+    await Axios.put("http://localhost:3001/update", { wage: newWage, id: id }).then(
+      (res) => {
         setEmployeeList(
           employeeList.map((val) => {
             return val.id == id
@@ -67,8 +149,8 @@ function App() {
     );
   };
 
-const deleteEmployee = (id) => {
-    Axios.delete(`http://localhost:3001/delete/${id}`).then((response) => {
+const deleteEmployee = async (id) => {
+  await Axios.delete(`http://localhost:3001/delete/${id}`).then((res) => {
       setEmployeeList(
         employeeList.filter((val) => {
           return val.id != id;
@@ -76,6 +158,10 @@ const deleteEmployee = (id) => {
       );
     });
   };
+
+  // useEffect(() => {
+  //   getEmployees();
+  // }, []);
 
   return (
     <div className="App container">
@@ -107,7 +193,6 @@ const deleteEmployee = (id) => {
       </div>
       <hr/>
       <div className="employees">
-        <button className="btn btn-primary" onClick={getEmployees}>Show employees</button>
 
         {employeeList.map((val, key) => {
           return (
@@ -123,7 +208,7 @@ const deleteEmployee = (id) => {
                     className="form-control"
                     style={{ width: "300px" }}
                     type="number"
-                    placeholder="15000..."
+                    placeholder="500..."
                     onChange={(event) => {
                       setNewWage(event.target.value)
                     }}
@@ -137,6 +222,15 @@ const deleteEmployee = (id) => {
           );
         })}
       </div>
+      <br/>
+      <hr/>
+      <br/>
+      <BoostrapTable
+      keyField="name"
+      data={employeeList}
+      columns = {column}
+      pagination = {paginationFactory()}
+      />
     </div>
   );
 }
