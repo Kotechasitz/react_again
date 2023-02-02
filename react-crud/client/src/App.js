@@ -16,74 +16,11 @@ const App = () => {
     },
     {
       name: "eiei",
-      age: 9,
+      age: 10,
       country: "test",
       position: "tester",
       wage: 100,
-    },
-    {
-      name: "eiei",
-      age: 8,
-      country: "test",
-      position: "tester",
-      wage: 100,
-    },
-    {
-      name: "eiei",
-      age: 7,
-      country: "test",
-      position: "tester",
-      wage: 100,
-    },
-    {
-      name: "eiei",
-      age: 6,
-      country: "test",
-      position: "tester",
-      wage: 100,
-    },
-    {
-      name: "eiei",
-      age: 5,
-      country: "test",
-      position: "tester",
-      wage: 100,
-    },
-    {
-      name: "eiei",
-      age: 4,
-      country: "test",
-      position: "tester",
-      wage: 100,
-    },
-    {
-      name: "eiei",
-      age: 3,
-      country: "test",
-      position: "tester",
-      wage: 100,
-    },
-    {
-      name: "eiei",
-      age: 2,
-      country: "test",
-      position: "tester",
-      wage: 100,
-    },
-    {
-      name: "eiei",
-      age: 1,
-      country: "test",
-      position: "tester",
-      wage: 100,
-    },
-    {
-      name: "eiei",
-      age: 0,
-      country: "test",
-      position: "tester",
-      wage: 100,
-    },
+    }
   ]);
   const [name, setName] = useState("");
   const [age, setAge] = useState(0);
